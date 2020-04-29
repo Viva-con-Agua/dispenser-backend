@@ -8,7 +8,7 @@ type (
 	Entry struct {
 		Label    Label   `json:"label" validator:"required"`
 		Url      string  `json:"url" validator:"required"`
-		Entries  Entries `json:"entries" validator:"required"`
+		Entries  Entries `json:"entries"`
 		RoleName string  `json:"role_name" validator:"required"`
 		Style    string  `json:"style" validator:"required"`
 	}
