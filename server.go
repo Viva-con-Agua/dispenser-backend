@@ -1,7 +1,6 @@
 package main
 
 import (
-	"auth-backend/nats"
 	controller "dispenser-backend/controllers"
 	"dispenser-backend/database"
 	"dispenser-backend/utils"
@@ -31,9 +30,6 @@ func main() {
 	database.ConnectMongo()
 	//create echo server
 	store := auth.RedisSession()
-	nats.Connect()
-	nats.SubscribeAccessAdd()
-	nats.SubscribeAccessDelete()
 	//create echo server
 	e := echo.New()
 	m := middleware.CORSWithConfig(middleware.CORSConfig{
