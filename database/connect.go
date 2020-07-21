@@ -49,6 +49,29 @@ func NavigationInsert(n *models.Navigation) error {
 	return nil
 }
 
+func NavigationUpdate(n *models.Navigation) error {
+	var bNav interface{}
+	bn, err := json.Marshal(n)
+	if err != nil {
+		log.Print("database.NavigationInsert: ", err)
+		return err
+	}
+	err = bson.UnmarshalExtJSON(bn, true, &bNav)
+	if err != nil {
+		log.Print("database.NavigationInsert: ", err)
+	}
+
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+	res, err := NavCollection.UpdateOne(ctx, bson.M{"name": n.Name}, bson.D{{"$set", bNav}})
+	log.Print(res)
+	if err != nil {
+		log.Print("database.NavigationInsert: ", err)
+		return err
+	}
+	return nil
+}
+
 func NavigationGetByName(name string) (*models.Navigation, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()

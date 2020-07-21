@@ -23,6 +23,20 @@ func NavigationInsert(c echo.Context) (err error) {
 	return c.JSON(http.StatusCreated, resp.Created())
 }
 
+func NavigationUpdate(c echo.Context) (err error) {
+	body := new(models.Navigation)
+	if err = c.Bind(body); err != nil {
+		return c.JSON(http.StatusBadRequest, err)
+	}
+	if err = c.Validate(body); err != nil {
+		return c.JSON(http.StatusBadRequest, err)
+	}
+	if err = database.NavigationUpdate(body); err != nil {
+		return c.JSON(http.StatusInternalServerError, resp.InternelServerError)
+	}
+	return c.JSON(http.StatusOK, resp.Updated(body.Name))
+}
+
 func NavigationGetByName(c echo.Context) (err error) {
 	name := c.Param("name")
 	response, err := database.NavigationGetByName(name)

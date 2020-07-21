@@ -42,6 +42,7 @@ func main() {
 	e.Validator = &CustomValidator{validator: validator.New()}
 	apiV1 := e.Group("/v1")
 	apiV1.POST("/navigation", controller.NavigationInsert)
+	apiV1.PUT("/navigation", controller.NavigationUpdate)
 	apiV1.GET("/navigation/:name", controller.NavigationGetByName)
 	e.Logger.Fatal(e.Start(":1323"))
 }
