@@ -9,9 +9,10 @@ var (
 		DB struct {
 			Host string `required:"true"`
 		}
+		Alloworigins []string
 	}{}
 )
 
 func LoadConfig() {
-	configor.Load(&Config, "config.yml")
+	configor.Load(&Config, "config/config.yml")
 }

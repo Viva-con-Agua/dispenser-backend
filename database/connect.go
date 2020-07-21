@@ -55,7 +55,7 @@ func NavigationGetByName(name string) (*models.Navigation, error) {
 	result := new(models.Navigation)
 	err := NavCollection.FindOne(ctx, bson.M{"name": name}).Decode(&result)
 	if err != nil {
-		log.Print("database.NavigationGet")
+		log.Print("database.NavigationGet", err)
 		return nil, err
 	}
 	return result, err

@@ -1,11 +1,12 @@
 db:
-    host: mongodb://172.3.80.7:27017 
+    host: mongodb://172.2.80.7:27017 
 nats:
     url: nats://172.2.60.2:4222
 redis:
     url: 172.2.60.3:6379
 alloworigins:
-- "http://localhost:8081"
+    - "http://172.2.20.1"
+    - "http://localhost:8081"
 cookie:
     samesite: none
     secure: false
